@@ -24,19 +24,19 @@ The variables included in this dataset are:
 * **date**: The date on which the measurement was taken in YYYY-MM-DD format
 * **interval**: Identifier for the 5-minute interval in which measurement was taken
 
-The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.
+The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.  
 
 
-## Loading and preprocessing the data & global options
 
-Load required R libraries
+
+#### Load required R libraries and set options
 
 ```r
 library(tidyverse)
 ```
 
 ```
-## -- Attaching packages ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ tidyverse 1.3.0 --
+## -- Attaching packages ------------------------------------------------------------------------------------------------------------------------------------- tidyverse 1.3.0 --
 ```
 
 ```
@@ -47,7 +47,7 @@ library(tidyverse)
 ```
 
 ```
-## -- Conflicts --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+## -- Conflicts ---------------------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -56,20 +56,17 @@ library(tidyverse)
 knitr::opts_chunk$set(dev=c('png'))
 options(scipen = 1, digits = 2)
 ```
+## Load and pre-proces the data 
 
-Download and unzip data set, save in Data folder
-
-```r
-dir.create(paste0(getwd(), '/Data'))
-```
-
-```
-## Warning in dir.create(paste0(getwd(), "/Data")): 'C:
-## \Users\dtaylor160401\Documents\DVT\Courses\Reproducible_Research_Coursera\Reproducible_research_master\Data'
-## already exists
-```
+### Download and unzip data set, save in Data folder
 
 ```r
+new_data_dir <- paste0(getwd(), '/Data')
+
+if(!dir.exists(new_data_dir)) {
+  dir.create(new_data_dir)
+}
+
 file_url<- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip"
 dest_file <- paste0(getwd(), '/Data/activity.zip')
 
@@ -78,7 +75,7 @@ unzip(dest_file, exdir = "Data")
 ```
 
 
-Load data
+### Load data
 
 ```r
 activity_data <- read.csv(file = 'Data/activity.csv')

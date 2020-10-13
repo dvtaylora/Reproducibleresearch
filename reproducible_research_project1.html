@@ -384,32 +384,40 @@ summary {
 <li><strong>interval</strong>: Identifier for the 5-minute interval in which measurement was taken</li>
 </ul>
 <p>The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.</p>
-<div id="loading-and-preprocessing-the-data-global-options" class="section level2">
-<h2>Loading and preprocessing the data &amp; global options</h2>
-<p>Load required R libraries</p>
+<div id="load-required-r-libraries-and-set-options" class="section level4">
+<h4>Load required R libraries and set options</h4>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ tidyverse 1.3.0 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------------------------------------------------------------------------------------------------- tidyverse 1.3.0 --</code></pre>
 <pre><code>## v ggplot2 3.3.1     v purrr   0.3.4
 ## v tibble  3.0.1     v dplyr   1.0.0
 ## v tidyr   1.1.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.5.0</code></pre>
-<pre><code>## -- Conflicts --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ---------------------------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>knitr::opts_chunk$set(dev=c(&#39;png&#39;))
 options(scipen = 1, digits = 2)</code></pre>
-<p>Download and unzip data set, save in Data folder</p>
-<pre class="r"><code>dir.create(paste0(getwd(), &#39;/Data&#39;))</code></pre>
-<pre><code>## Warning in dir.create(paste0(getwd(), &quot;/Data&quot;)): &#39;C:
-## \Users\dtaylor160401\Documents\DVT\Courses\Reproducible_Research_Coursera\Reproducible_research_master\Data&#39;
-## already exists</code></pre>
-<pre class="r"><code>file_url&lt;- &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;
+</div>
+<div id="load-and-pre-proces-the-data" class="section level2">
+<h2>Load and pre-proces the data</h2>
+<div id="download-and-unzip-data-set-save-in-data-folder" class="section level3">
+<h3>Download and unzip data set, save in Data folder</h3>
+<pre class="r"><code>new_data_dir &lt;- paste0(getwd(), &#39;/Data&#39;)
+
+if(!dir.exists(new_data_dir)) {
+  dir.create(new_data_dir)
+}
+
+file_url&lt;- &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;
 dest_file &lt;- paste0(getwd(), &#39;/Data/activity.zip&#39;)
 
 download.file(file_url, destfile = dest_file)
 unzip(dest_file, exdir = &quot;Data&quot;)</code></pre>
-<p>Load data</p>
+</div>
+<div id="load-data" class="section level3">
+<h3>Load data</h3>
 <pre class="r"><code>activity_data &lt;- read.csv(file = &#39;Data/activity.csv&#39;)</code></pre>
+</div>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>
